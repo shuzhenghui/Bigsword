@@ -130,6 +130,7 @@
 
     </script>
 
+    <!-- 退出按钮的点击事件 -->
     <script>
         $(function () {
             $('.user_center_link>a').last().on('click', function (e) {
@@ -151,6 +152,22 @@
 
                     }
                 })
+            })
+        })
+    </script>
+
+    <script>
+        $(function () {
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost:8000/admin/getuser',
+                success: function (a) {
+                    // console.log(a);
+                    if (a.code == 200) {
+                        $('.user_info').find('span').html('欢迎&nbsp;&nbsp;' + a.data.nickname).end().find('img').attr('src', a.data.user_pic);
+                        $('.user_center_link').find('img').attr('src', a.data.user_pic);
+                    }
+                }
             })
         })
     </script>
